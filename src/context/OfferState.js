@@ -1,11 +1,21 @@
 
 import offerContext from "./offerContext"
+import React, { useState,useContext} from 'react';
 
 const host = "http://192.168.0.203:2828";
-const Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ5Y2NlM2JhNDA4YTJlMjg3ZjJlYzUiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQHNpc3VnYW16LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHhZZzVMUlNRRWxiNENOZnVocjdncmUyUjNMOUQ5eDhaWmc0c0QxSW9uY1N6ZWFTSHgzMTIuIiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wN1QwNTozNjozNS42NjBaIiwibW9kaWZpZWRBdCI6IjIwMjMtMTEtMDdUMDU6MzY6MzUuNjYwWiIsImlhdCI6MTY5OTMzNTQxMywiZXhwIjoxNjk5OTQwMjEzfQ.NrLsWSnyD09P3h30rsng_R3bygn3TsKl8nXyD7qom4c";
+//const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ5Y2NlM2JhNDA4YTJlMjg3ZjJlYzUiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQHNpc3VnYW16LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHhZZzVMUlNRRWxiNENOZnVocjdncmUyUjNMOUQ5eDhaWmc0c0QxSW9uY1N6ZWFTSHgzMTIuIiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wN1QwNTozNjozNS42NjBaIiwibW9kaWZpZWRBdCI6IjIwMjMtMTEtMDdUMDU6MzY6MzUuNjYwWiIsImlhdCI6MTY5OTMzNTQxMywiZXhwIjoxNjk5OTQwMjEzfQ.NrLsWSnyD09P3h30rsng_R3bygn3TsKl8nXyD7qom4c";
 
 const OfferState = (props) => {
+    console.log("props.adminname ",props.adminname)
+    console.log("props.adminname Email ",props.adminname)
+
     
+    const [adminname, setAdminname] = useState(props.adminname);
+    const [adminEmail, setAdminEmail] = useState(props.adminEmail);
+    const [token, setToken] = useState(props.tokendata);
+
+
+
     const dashboardData = async () => {
         try{
             console.log("${host}/admin/dashboard",`${host}/admin/dashboard`)
@@ -14,7 +24,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -35,7 +45,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -59,7 +69,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -83,7 +93,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 },
                 body:JSON.stringify(data)
             }).then(d => d)
@@ -106,7 +116,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(d => d)
 
@@ -129,7 +139,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -151,7 +161,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -173,7 +183,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -195,7 +205,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -217,7 +227,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -239,7 +249,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -264,7 +274,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -286,7 +296,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 }
             }).then(data => data.json())
 
@@ -308,7 +318,7 @@ const OfferState = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token':Token
+                    'token':token
                 },
                 body:JSON.stringify(data)   
             }).then(data => data.json())
@@ -326,7 +336,7 @@ const OfferState = (props) => {
     
 
     return (
-        <offerContext.Provider value={{dashboardData,latatestUser,PlayerList,PlayerData,
+        <offerContext.Provider value={{adminname,adminEmail,dashboardData,latatestUser,PlayerList,PlayerData,
             PlayerAdd,PlayerDelete,RummyGameHistory,LudoGameHistory,GameLogicSet,GetRouletteHistoryData,GetCompleteWithdrawalData,
             GetCompleteDespositeData,GetRegisterReferralBonusData,GetMyReferralData  }}>
             {props.children}

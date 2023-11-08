@@ -1,11 +1,14 @@
 // Sidebar.js
 
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './Sidebar.module.css'; // Import CSS module
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "react-feather"
 import { useDispatch } from 'react-redux';
 import { AddCurrentPage } from '../../Redux/Features/CurrentPageDataSlice/CurrentPageDataSlice';
+
+import offerContext from '../../context/offerContext'
+
 function Sidebar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isRummyDropdownOpen, setIsRummyDropdownOpen] = useState(false);
@@ -42,6 +45,10 @@ function Sidebar() {
   const handleHover = (value) => {
     setSocialUrl(value);
   };
+
+  const context = useContext(offerContext)
+    const { adminname,adminEmail } = context
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
@@ -52,8 +59,8 @@ function Sidebar() {
         <div className={styles.adminInfoleft}>
           <img src="/Image/Sidebar/icon.png" alt="Admin" />
           <div>
-            <div>Admin</div>
-            <div>Admin1</div>
+            <div>{adminname}</div>
+            <div>{adminEmail}</div>
           </div>
         </div>
         <div onClick={toggleAdminDropdown}>
@@ -74,7 +81,7 @@ function Sidebar() {
 
       {/*<div className={styles.mainmenu}>Main Menu</div>  ******************************************************************** */}
       <ul className={styles.navList}>
-        
+            
         <li className={styles.navlistLi} onMouseEnter={()=>handleHover("adminpage")} onMouseLeave={()=>handleHover("")}>
           <Link to="/adminpage" onClick={() => handleClick('Dashboard')}>
             <li className={styles.pppp}>
@@ -238,8 +245,8 @@ function Sidebar() {
           </Link>
         </li>
 
-        <div className={styles.mainmenu}>Others</div>
-        {/* **************************************************************************** */}
+       {/* <div className={styles.mainmenu}>Others</div>
+         **************************************************************************** */}
        <li className={styles.navlistLi} onMouseEnter={()=>handleHover("settings")} onMouseLeave={()=>handleHover("")}>
           <Link to="/settings" onClick={() => handleClick('Settings')}>
             <li className={styles.pppp}>

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
 .loginContainer {
     max-width: 300px;
@@ -19,9 +20,10 @@
     align-items: left;
   }
   
-  label {
+  loginlebel {
     display: block;
     margin-bottom: 8px;
+    color:black
   }
   
   input[type="text"],

@@ -1,10 +1,13 @@
 // Login.js
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './Login.module.css'; // Import CSS module
 
-function Login() {
+const host = "http://192.168.0.203:2828";
+
+
+function Login(props) {
   const [formData, setFormData] = useState({
-    userId: '',
+    email: '',
     password: '',
   });
 
@@ -15,21 +18,56 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const LoginData = async (data) => {
+      try{
+          console.log("PlayerList :::::::",host)
+          const response = await fetch(`${host}/admin/login`, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body:JSON.stringify(data)
+          }).then(d => d.json())
+
+          console.log("data api from :latatestUser :::...", response)
+          return response
+
+
+      }catch(e){
+          console.log("e :" ,e)
+      }
+  } 
+
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+
+    let resData = await LoginData(formData)
+    console.log(resData.status)
+
+    if(resData.status){
+      
+        props.setToken(resData.data.token);
+        props.setAdmin(resData.data.name);
+        props.setAdminEmail(resData.data.email)
+
+    }else{
+      alert("Please Enter valid Email Or Passward..!!")
+    }
   };
 
   return (
     <div className={styles.layout}>
     <div className={styles.loginContainer}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="userId">User ID:</label>
+        <label htmlFor="email">Email Id:</label>
         <input
           type="text"
-          id="userId"
-          name="userId"
-          value={formData.userId}
+          id="email"
+          name="email"
+          value={formData.email}
           onChange={handleChange}
           required
         />
