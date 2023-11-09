@@ -12,7 +12,8 @@ function PlayerRegistration() {
         username: '',
         mobileNumber: '',
         password: '',
-        deviceId:'111'
+        deviceId:'111',
+        isVIP:1
     });
 
     const handleChange = (event) => {
