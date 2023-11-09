@@ -1,40 +1,60 @@
 // SocialURL.js
 
-import React, { useState } from 'react';
+import React,  { useState,useContext,useEffect } from 'react';
 import styles from './SocialURL.module.css';
+import offerContext from '../../context/offerContext'
+
 
 function SocialURL() {
-  const [socialURLs, setSocialURLs] = useState([
-    {
-      id: 1,
-      platform: "Facebook",
-      url: "https://www.facebook.com/example",
-    },
-    {
-      id: 2,
-      platform: "Twitter",
-      url: "https://twitter.com/example",
-    },
-  ]);
+  const [socialURLs, setSocialURLs] = useState([]);
+
+
+
+  const context = useContext(offerContext)
+  console.log("Contect ",context)
+  const { SocailURLsList,SocailURLsAdd,DeleteSocailURLs } = context
+  
+  useEffect( () => {
+    const submitdata = async () => {
+    
+      setSocialURLs(await SocailURLsList())
+
+  }
+
+  submitdata()
+  },[]);
+
 
   const [newPlatform, setNewPlatform] = useState('');
   const [newURL, setNewURL] = useState('');
 
-  const addSocialURL = () => {
+  const addSocialURL = async () => {
     if (newPlatform && newURL) {
       const newSocialURL = {
         id: socialURLs.length + 1,
         platform: newPlatform,
         url: newURL,
       };
-      setSocialURLs([...socialURLs, newSocialURL]);
-      setNewPlatform('');
-      setNewURL('');
+
+      let res = await SocailURLsAdd(newSocialURL)
+      console.log("REsponce ::::::::::::::::::::::",res)
+
+      if(res.status == 200){
+          setSocialURLs([...socialURLs, newSocialURL]);
+          setNewPlatform('');
+          setNewURL('');
+      }else{
+          alert("Error Please enter")
+      }
+
+
+      
     }
   };
 
-  const deleteSocialURL = (id) => {
+  const deleteSocialURL =async (id) => {
     const updatedSocialURLs = socialURLs.filter((url) => url.id !== id);
+    await DeleteSocailURLs(id)
     setSocialURLs(updatedSocialURLs);
   };
 

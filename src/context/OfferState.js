@@ -333,12 +333,83 @@ const OfferState = (props) => {
         }
     } 
 
+    //================= socail List 
+
+    const SocailURLsList = async () => {
+        try{
+            console.log("PlayerList :::::::",`${host}//admin/social/socialURLsList`)
+            const response = await fetch(`${host}/admin/social/socialURLsList`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json.socialURLs
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const SocailURLsAdd = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/social/socialurl`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const DeleteSocailURLs = async (socialid) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/social/socialurldelete/`+socialid, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    //=============================
     
 
     return (
         <offerContext.Provider value={{adminname,adminEmail,dashboardData,latatestUser,PlayerList,PlayerData,
             PlayerAdd,PlayerDelete,RummyGameHistory,LudoGameHistory,GameLogicSet,GetRouletteHistoryData,GetCompleteWithdrawalData,
-            GetCompleteDespositeData,GetRegisterReferralBonusData,GetMyReferralData  }}>
+            GetCompleteDespositeData,GetRegisterReferralBonusData,GetMyReferralData,
+            SocailURLsList,SocailURLsAdd,DeleteSocailURLs  }}>
             {props.children}
         </offerContext.Provider>)
 
