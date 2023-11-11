@@ -85,7 +85,7 @@ function Sidebar() {
         <li className={styles.navlistLi} onMouseEnter={()=>handleHover("adminpage")} onMouseLeave={()=>handleHover("")}>
           <Link to="/adminpage" onClick={() => handleClick('Dashboard')}>
             <li className={styles.pppp}>
-            {socialUrl==="adminpage"?<img src="/Image/Sidebar/gdash.png" alt="Dashboard" />:<img src="/Image/Sidebar/dash.png" alt="Dashboard" />}
+            {socialUrl==="adminpage"?<img src={process.env.PUBLIC_URL+'/Image/Sidebar/gdash.png'} alt="Dashboard" />:<img src="/Image/Sidebar/dash.png" alt="Dashboard" />}
 
               Dashboard
             </li>

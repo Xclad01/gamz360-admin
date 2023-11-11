@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import styles from './Notification.module.css';
+import offerContext from '../../context/offerContext'
 
 const Notification = () => {
   const [notificationTitle, setNotificationTitle] = useState('');
@@ -13,12 +14,21 @@ const Notification = () => {
     setNotificationDescription(e.target.value);
   };
 
+  const context = useContext(offerContext)
+  console.log("Contect ",context)
+  const { SendPushnotification } = context
+  
+
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     // You can add your logic here to handle the form submission
+    SendPushnotification({notificationTitle,notificationDescription})
     console.log('Title:', notificationTitle);
     console.log('Description:', notificationDescription);
   };
+
+  
+  
 
   return (
     <div className={styles.notificationPage}>

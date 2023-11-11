@@ -2,7 +2,7 @@
 import React, { useState,useContext } from 'react';
 import styles from './Login.module.css'; // Import CSS module
 
-const host = "http://192.168.0.203:2828";
+const host = "http://16.170.158.18:2828";
 
 
 function Login(props) {

@@ -7,9 +7,6 @@ import offerContext from '../../context/offerContext'
 
 function SocialURL() {
   const [socialURLs, setSocialURLs] = useState([]);
-
-
-
   const context = useContext(offerContext)
   console.log("Contect ",context)
   const { SocailURLsList,SocailURLsAdd,DeleteSocailURLs } = context

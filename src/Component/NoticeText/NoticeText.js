@@ -1,28 +1,27 @@
 // NoticeText.js
 
-import React, { useState } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import styles from './NoticeText.module.css';
+import offerContext from '../../context/offerContext'
 
 function NoticeText() {
-  const [notices, setNotices] = useState([
-    {
-      id: 1,
-      title: "Important Announcement",
-      content: "We have scheduled maintenance on the gaming server. Please plan accordingly.",
-      date: "2023-11-15",
-    },
-    {
-      id: 2,
-      title: "New Game Release",
-      content: "Exciting news! A new game will be released on November 20th. Get ready for the fun!",
-      date: "2023-11-10",
-    },
-  ]);
+  const [notices, setNotices] = useState([]);
 
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
 
-  const addNotice = () => {
+  const context = useContext(offerContext)
+  console.log("Contect ",context)
+  const { NoticeTextList,NoticeTextLsAdd,DeleteNoticeText } = context
+  
+  useEffect( () => {
+    const submitdata = async () => {
+      setNotices(await NoticeTextList())
+    }
+  submitdata()
+  },[]);
+
+  const addNotice = async () => {
     if (newTitle && newContent) {
       const newNotice = {
         id: notices.length + 1,
@@ -30,14 +29,27 @@ function NoticeText() {
         content: newContent,
         date: new Date().toLocaleDateString(),
       };
-      setNotices([...notices, newNotice]);
-      setNewTitle('');
-      setNewContent('');
+
+      let res = await NoticeTextLsAdd(newNotice)
+      console.log("REsponce ::::::::::::::::::::::",res)
+
+      if(res.status == 200){
+        setNotices([...notices, newNotice]);
+        setNewTitle('');
+        setNewContent('');
+      }else{
+          alert("Error Please enter")
+      }
+
+
+      
     }
   };
 
-  const deleteNotice = (id) => {
+  const deleteNotice = async (id) => {
     const updatedNotices = notices.filter((notice) => notice.id !== id);
+    await DeleteNoticeText(id)
+
     setNotices(updatedNotices);
   };
 
