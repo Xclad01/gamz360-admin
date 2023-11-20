@@ -96,7 +96,7 @@ function Sidebar() {
         <li className={styles.navlistLi} onMouseEnter={()=>handleHover("playermanagement")} onMouseLeave={()=>handleHover("")}>
           <Link to="/playermanagement" onClick={() => handleClick('Player Management')}>
             <li className={styles.pppp}>
-            {socialUrl==="playermanagement"?<img src="/Image/Sidebar/gplayer.png" alt="Dashboard" />:<img src="/Image/Sidebar/playerM.png" alt="Dashboard" />}
+            {socialUrl==="playermanagement"?<img src={process.env.PUBLIC_URL+"/Image/Sidebar/gplayer.png"} alt="Dashboard" />:<img src="/Image/Sidebar/playerM.png" alt="Dashboard" />}
               Player Management
             </li>
           </Link>
