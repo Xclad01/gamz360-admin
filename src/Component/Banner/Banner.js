@@ -1,51 +1,65 @@
-import React, {useContext, useState } from 'react';
+import React, {useContext,useEffect, useState } from 'react';
 import styles from './Banner.module.css';
 import offerContext from '../../context/offerContext'
 
 function Banner() {
-  const [notices, setNotices] = useState([
-    {
-      id: 1,
-      title: "Important Announcement",
-      imageUrl: "https://wallpapers.com/images/hd/youtube-banner-gaming-557nnzh0ovcuj01c.jpg",
-      date: "2023-11-15",
-    },
-    {
-      id: 2,
-      title: "New Game Release",
-      imageUrl: "https://img.freepik.com/premium-psd/gaming-youtube-banner_584197-753.jpg",
-      date: "2023-11-10",
-    },
-  ]);
+  const [banners, setBanners] = useState([]);
 
   const [newTitle, setNewTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
   const context = useContext(offerContext)
   console.log("Contect ",context)
-  //const { dashboardData } = context
+  const { BannerList,BannerAdd,DeleteBanner } = context
+  
+    
+  useEffect( () => {
+    const submitdata = async () => {
+      console.log("aaaaaaaaaaa")
+      setBanners(await BannerList())
 
 
-  const addNotice = () => {
+  }
+
+  submitdata()
+  },[]);
+
+
+  const addNotice = async () => {
     if (newTitle && selectedImage) {
-      const newNotice = {
-        id: notices.length + 1,
+      const newBanner = {
+        id: banners.length + 1,
         title: newTitle,
         imageUrl: URL.createObjectURL(selectedImage), // Display the selected image
         date: new Date().toLocaleDateString(),
       };
-      setNotices([...notices, newNotice]);
-      setNewTitle('');
-      setSelectedImage(null);
+
+      let res = await BannerAdd(newBanner)
+      console.log("REsponce ::::::::::::::::::::::",res)
+
+      if(res.status == 200){
+          
+
+          setBanners([...banners, newBanner]);
+          setNewTitle('');
+          setSelectedImage(null);
+      }else{
+          alert("Error Please enter")
+      }
+
+
+      
     }
   };
 
-  const deleteNotice = (id) => {
-    const updatedNotices = notices.filter((notice) => notice.id !== id);
-    setNotices(updatedNotices);
+  const deleteNotice = async (id) => {
+    const updatedNotices = banners.filter((notice) => notice.id !== id);
+    await DeleteBanner(id)
+    setBanners(updatedNotices);
   };
 
   const handleImageChange = (e) => {
+    console.log("e")
     const imageFile = e.target.files[0];
     if (imageFile) {
       setSelectedImage(imageFile);
@@ -74,7 +88,8 @@ function Banner() {
       </div>
       <h2 className={styles.noticeTextTitle}>Gaming Dashboard Banners</h2>
       <div className={styles.noticeList}>
-        {notices.map((notice) => (
+
+        {banners.map((notice) => (
           <div key={notice.id} className={styles.noticeItem}>
             
             {notice.imageUrl && (

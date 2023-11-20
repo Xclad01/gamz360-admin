@@ -404,12 +404,236 @@ const OfferState = (props) => {
 
     //=============================
     
+     //================= Notice  List 
 
+     const NoticeTextList = async () => {
+        try{
+            console.log("PlayerList :::::::",`${host}//admin/noticetext/noticeTextList`)
+            const response = await fetch(`${host}/admin/noticetext/noticeTextList`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json.noticeText
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const NoticeTextLsAdd = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/noticetext/noticeText`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const DeleteNoticeText = async (id) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/noticetext/noticedelete/`+id, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    //=============================
+    
+     //================= gamementenance  List 
+
+     const GetMentenance = async () => {
+        try{
+            console.log("PlayerList :::::::",`${host}//admin/gamementenance/getMentenanceStatus`)
+            const response = await fetch(`${host}/admin/gamementenance/getMentenanceStatus`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const MentenanceUpdate = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/gamementenance/mentenanceStatusUpdate`, {
+                method: 'put',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify({flag:data})
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+   
+
+    //=============================
+    
+    
+     //================= notification  List 
+
+     const SendPushnotification = async (data) => {
+        try{
+            console.log("PlayerList :::::::",`${host}//admin/notification/sendNotification`)
+            const response = await fetch(`${host}/admin/notification/sendNotification`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :SendPushnotification :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+    //=================================================
+
+    //================= Banner   List 
+
+    const BannerList = async () => {
+        try{
+            console.log("PlayerList :::::::",`${host}//admin/banner/bannerList`)
+            const response = await fetch(`${host}/admin/banner/bannerList`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json.bannerListData
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const BannerAdd = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/banner/bannerAdd`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const DeleteBanner = async (id) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/banner/bannerdelete/`+id, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    //=============================
+    
     return (
         <offerContext.Provider value={{adminname,adminEmail,dashboardData,latatestUser,PlayerList,PlayerData,
             PlayerAdd,PlayerDelete,RummyGameHistory,LudoGameHistory,GameLogicSet,GetRouletteHistoryData,GetCompleteWithdrawalData,
             GetCompleteDespositeData,GetRegisterReferralBonusData,GetMyReferralData,
-            SocailURLsList,SocailURLsAdd,DeleteSocailURLs  }}>
+            SocailURLsList,SocailURLsAdd,DeleteSocailURLs,
+            NoticeTextList,NoticeTextLsAdd,DeleteNoticeText,
+            GetMentenance,MentenanceUpdate,
+            SendPushnotification,
+            BannerList,BannerAdd,DeleteBanner
+            }}>
             {props.children}
         </offerContext.Provider>)
 

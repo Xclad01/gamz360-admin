@@ -119,7 +119,7 @@ const PlayerManagement = () => {
         />
         <button className={styles.resetbtn} onClick={resetDate}>Reset</button>
 
-        <button className={styles.addbtn} onClick={ () => navigateToUserRegister() } >ADD</button>
+        <button className={styles.addbtn} onClick={ () => navigateToUserRegister() } >Add User</button>
    
        </div>
 
