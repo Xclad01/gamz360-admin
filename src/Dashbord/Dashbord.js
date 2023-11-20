@@ -4,12 +4,17 @@ import Navbar from '../Component/Navbar/Navbar';
 import Sidebar from '../Component/Sidebar/Sidebar';
 import AdminPage from '../Component/AdminPage/AdminPage';
 import PlayerManagement from '../Component/PlayerManagement/PlayerManagement';
+import BotManagement from '../Component/BotManagement/BotManagement';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from '../Component/Login/Login';
 import SetGameLogic from '../Component/SetGameLogic/SetGameLogic';
 import GameHistory from '../Component/GameHistory/GameHistory';
 import PlayerRegistration from '../Component/PlayerRegistration/PlayerRegistration';
+import BotRegistration from '../Component/BotRegistration/BotRegistration';
+
 import AUserDetails from '../Component/UserDetails/AUserDetails/AUserDetails';
+import ABotDetails from '../Component/UserDetails/ABotDetails/ABotDetails';
+
 import SocialURL from '../Component/SocialURL/SocialURL';
 import NoticeText from '../Component/NoticeText/NoticeText';
 import Mentenance from '../Component/Mentenance/Mentenance';
@@ -33,6 +38,7 @@ const Dashbord = () => {
                                 <Route path="/" element={<AdminPage />} />
                                 <Route path="/adminpage" element={<AdminPage />} />
                                 <Route path="/playermanagement" element={<PlayerManagement />} />
+                                <Route path="/botmanagement" element={<BotManagement />} />
                                 <Route path="/setgamelogic" element={<SetGameLogic />} />
                                 <Route path="/gamehistory" element={<GameHistory />} />
                                 <Route path="/playerregistration" element={<PlayerRegistration />} />
@@ -43,6 +49,11 @@ const Dashbord = () => {
                                 <Route path="/notification" element={<Notification />} />
                                 <Route path="/banner" element={<Banner />} />
                                 <Route path="/settings" element={<Settings />} />
+                                <Route path="/aBotDetails" element={<ABotDetails />} />
+                                <Route path="/botregistration" element={<BotRegistration />} />
+
+                                
+
                              
                             </Routes>
                         </div>

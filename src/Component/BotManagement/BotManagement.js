@@ -1,5 +1,5 @@
 import React, { useState,useContext,useEffect } from 'react';
-import styles from './PlayerManagement.module.css';
+import styles from './BotManagement.module.css';
 import {useNavigate} from 'react-router-dom';
 import offerContext from '../../context/offerContext'
 
@@ -7,7 +7,7 @@ import offerContext from '../../context/offerContext'
 
 const recordsPerPage = 5;
 
-const PlayerManagement = () => {
+const BotManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -31,12 +31,12 @@ const PlayerManagement = () => {
 
   const context = useContext(offerContext)
   console.log("Contect ",context)
-  const { PlayerList,PlayerDelete } = context
+  const { BotList,BotDelete } = context
   
   useEffect( () => {
     const submitdata = async () => {
     
-      setUserData(await PlayerList())
+      setUserData(await BotList())
 
   }
 
@@ -79,29 +79,29 @@ const PlayerManagement = () => {
   const navigate = useNavigate();
   const navigateToContacts = (userid) => {
     // 👇️ navigate to /contacts 
-    console.log("User ID ",userid)
+    console.log("User ID  User Bot ",userid)
 
-    navigate('/aUserDetails', {state:userid,Iscom:1});
+    navigate('/aBotDetails', {state:userid,Iscom:1});
   };
 
   const navigateToUserRegister = (userid) => {
     // 👇️ navigate to /contacts 
     console.log("User ID ",userid)
 
-    navigate('/PlayerRegistration',{state:0});
+    navigate('/botregistration',{state:1});
   };
 
 
   const DeleteUser = async (userid) =>{
-    await PlayerDelete(userid)
+    await BotDelete(userid)
 
-    setUserData(await PlayerList())
+    setUserData(await BotList())
   }
   
 
   return (
     <div className={styles['player-management-container']}>
-      <h1 className={styles.playermanage}>Player Management</h1>
+      <h1 className={styles.playermanage}>Bot Management</h1>
 
       <div className={styles.filters}>
        <div className={styles.filters}>
@@ -229,4 +229,4 @@ const PlayerManagement = () => {
   );
 };
 
-export default PlayerManagement;
+export default BotManagement;

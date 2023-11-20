@@ -163,7 +163,7 @@ function Sidebar() {
 
         {/* ******************************************************************** */}
         <li className={styles.navlistLi} onMouseEnter={()=>handleHover("bot")} onMouseLeave={()=>handleHover("")}>
-          <Link to="/login" onClick={() => handleClick('Bot')}>
+          <Link to="/botmanagement" onClick={() => handleClick('Bot')}>
             <li className={styles.pppp}>
             {socialUrl==="bot"?<img src="/Image/Sidebar/gbot.png" alt="Dashboard" />:<img src="/Image/Sidebar/bot.png" alt="Dashboard" />}
               Bot

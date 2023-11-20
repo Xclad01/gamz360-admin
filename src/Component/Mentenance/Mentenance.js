@@ -19,8 +19,6 @@ const Mentenance = () => {
             let mantainceInfo = await GetMentenance()
             setversion(mantainceInfo.version)
             setMode(mantainceInfo.mentenance)
-
-
       }
     
       submitdata()

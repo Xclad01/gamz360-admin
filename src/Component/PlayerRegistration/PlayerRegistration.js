@@ -4,6 +4,7 @@ import offerContext from '../../context/offerContext'
 import { useNavigate } from 'react-router-dom';
 
 function PlayerRegistration() {
+
     const [formData, setFormData] = useState({
         retailer: '',
         country: 'India',
@@ -13,7 +14,8 @@ function PlayerRegistration() {
         mobileNumber: '',
         password: '',
         deviceId:'111',
-        isVIP:1
+        isVIP:1,
+        Iscom:0
     });
 
     const handleChange = (event) => {
@@ -37,10 +39,8 @@ function PlayerRegistration() {
         event.preventDefault();
         // You can handle the form submission here
         // This example just logs the data to the console
-        
         let res = await PlayerAdd(formData)
-        console.log("REsponce ::::::::::::::::::::::",res)
-
+        
         if(res.status == 200){
             navigateToContacts()
         }else{
@@ -59,7 +59,7 @@ function PlayerRegistration() {
             <div className={styles.registrationForm}>
             <div className={styles.PlayerRegistration}>
                 <div className={styles.d}>
-                    <h2>Player Registration</h2>
+                    <h2>"Player Registration"</h2>
                 </div>
                 <div className={styles.p}>
                     * Field are required

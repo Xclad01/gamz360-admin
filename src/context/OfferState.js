@@ -2,7 +2,7 @@
 import offerContext from "./offerContext"
 import React, { useState,useContext} from 'react';
 
-const host = "http://16.170.158.18:2828";
+const host = "http://16.170.158.18:2828";//"http://192.168.0.203:2828"//
 //const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ5Y2NlM2JhNDA4YTJlMjg3ZjJlYzUiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQHNpc3VnYW16LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHhZZzVMUlNRRWxiNENOZnVocjdncmUyUjNMOUQ5eDhaWmc0c0QxSW9uY1N6ZWFTSHgzMTIuIiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wN1QwNTozNjozNS42NjBaIiwibW9kaWZpZWRBdCI6IjIwMjMtMTEtMDdUMDU6MzY6MzUuNjYwWiIsImlhdCI6MTY5OTMzNTQxMywiZXhwIjoxNjk5OTQwMjEzfQ.NrLsWSnyD09P3h30rsng_R3bygn3TsKl8nXyD7qom4c";
 
 const OfferState = (props) => {
@@ -623,16 +623,169 @@ const OfferState = (props) => {
     } 
 
     //=============================
+
+
+     // ========= Bot Details =================
+
+     const BotList = async () => {
+        try{
+            console.log("PlayerList :::::::",`${host}/admin/bot/UserList`)
+            const response = await fetch(`${host}/admin/bot/BotList`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json.userList
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+
+
+    const BotAdd = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/bot/BotAdd`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const UploadProfile = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+
+            const formData = new FormData();
+            formData.append("image", data);
+
+            const response = await fetch(`${host}/admin/bot/ProfileUpload`, {
+                method: 'POST',
+                headers: {
+                    'token':token
+                },
+                body:formData
+            }).then(d => d.json()) 
+
+            console.log("response ",response)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            if(json.flag){
+                return json.path
+            }else{
+                return ""
+            }
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const BotDelete = async (userId) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            const response = await fetch(`${host}/admin/bot/BotDelete/`+userId, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(d => d)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    const BotData = async (userId) => {
+        try{
+            console.log("PlayerList :::::::",`${host}/admin/bot/BotData`)
+            const response = await fetch(`${host}/admin/bot/BotData?userId=`+userId, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                }
+            }).then(data => data.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json.userInfo
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    }
     
+    const BotUpdate = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+            console.log("BotUpdate :::::::",data)
+
+            const response = await fetch(`${host}/admin/bot/BotUpdate`, {
+                method: 'put',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                body:JSON.stringify(data)
+            }).then(d => d.json())
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            return await json
+
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+    //======================================================================================
     return (
-        <offerContext.Provider value={{adminname,adminEmail,dashboardData,latatestUser,PlayerList,PlayerData,
+        <offerContext.Provider value={{
+            host,
+            adminname,adminEmail,dashboardData,latatestUser,PlayerList,PlayerData,
             PlayerAdd,PlayerDelete,RummyGameHistory,LudoGameHistory,GameLogicSet,GetRouletteHistoryData,GetCompleteWithdrawalData,
             GetCompleteDespositeData,GetRegisterReferralBonusData,GetMyReferralData,
             SocailURLsList,SocailURLsAdd,DeleteSocailURLs,
             NoticeTextList,NoticeTextLsAdd,DeleteNoticeText,
             GetMentenance,MentenanceUpdate,
             SendPushnotification,
-            BannerList,BannerAdd,DeleteBanner
+            BannerList,BannerAdd,DeleteBanner,
+            BotList,BotAdd,BotDelete,BotData,UploadProfile,BotUpdate
             }}>
             {props.children}
         </offerContext.Provider>)
