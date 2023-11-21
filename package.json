@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": ".",
+  "homepage": "http://51.20.140.146:3000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
