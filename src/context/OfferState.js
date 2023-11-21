@@ -2,7 +2,7 @@
 import offerContext from "./offerContext"
 import React, { useState,useContext} from 'react';
 
-const host = "http://16.170.158.18:2828";//"http://192.168.0.203:2828"//
+const host = "http://16.170.158.18:2828";//"http://192.168.0.203:2828"
 //const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ5Y2NlM2JhNDA4YTJlMjg3ZjJlYzUiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQHNpc3VnYW16LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHhZZzVMUlNRRWxiNENOZnVocjdncmUyUjNMOUQ5eDhaWmc0c0QxSW9uY1N6ZWFTSHgzMTIuIiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wN1QwNTozNjozNS42NjBaIiwibW9kaWZpZWRBdCI6IjIwMjMtMTEtMDdUMDU6MzY6MzUuNjYwWiIsImlhdCI6MTY5OTMzNTQxMywiZXhwIjoxNjk5OTQwMjEzfQ.NrLsWSnyD09P3h30rsng_R3bygn3TsKl8nXyD7qom4c";
 
 const OfferState = (props) => {
@@ -600,6 +600,37 @@ const OfferState = (props) => {
         }
     } 
 
+    const UploadBanner = async (data) => {
+        try{
+            console.log("PlayerList :::::::",host)
+
+            const formData = new FormData();
+            formData.append("image", data);
+
+            const response = await fetch(`${host}/admin/banner/BannerUpload`, {
+                method: 'POST',
+                headers: {
+                    'token':token
+                },
+                body:formData
+            }).then(d => d.json()) 
+
+            console.log("response ",response)
+
+            const json =  response
+            console.log("data api from :latatestUser :::...", json)
+            if(json.flag){
+                return json.path
+            }else{
+                return ""
+            }
+
+        }catch(e){
+            console.log("e :" ,e)
+        }
+    } 
+
+
     const DeleteBanner = async (id) => {
         try{
             console.log("PlayerList :::::::",host)
@@ -784,7 +815,7 @@ const OfferState = (props) => {
             NoticeTextList,NoticeTextLsAdd,DeleteNoticeText,
             GetMentenance,MentenanceUpdate,
             SendPushnotification,
-            BannerList,BannerAdd,DeleteBanner,
+            BannerList,BannerAdd,DeleteBanner,UploadBanner,
             BotList,BotAdd,BotDelete,BotData,UploadProfile,BotUpdate
             }}>
             {props.children}

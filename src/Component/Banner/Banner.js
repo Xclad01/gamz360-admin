@@ -10,7 +10,7 @@ function Banner() {
 
   const context = useContext(offerContext)
   console.log("Contect ",context)
-  const { BannerList,BannerAdd,DeleteBanner } = context
+  const { BannerList,BannerAdd,DeleteBanner,UploadBanner,host } = context
   
     
   useEffect( () => {
@@ -30,7 +30,7 @@ function Banner() {
       const newBanner = {
         id: banners.length + 1,
         title: newTitle,
-        imageUrl: URL.createObjectURL(selectedImage), // Display the selected image
+        imageUrl: selectedImage,//URL.createObjectURL(selectedImage), // Display the selected image
         date: new Date().toLocaleDateString(),
       };
 
@@ -58,9 +58,13 @@ function Banner() {
     setBanners(updatedNotices);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     console.log("e")
-    const imageFile = e.target.files[0];
+   
+
+    const imageFile = await UploadBanner(e.target.files[0])
+
+    console.log("imageFile ",imageFile)
     if (imageFile) {
       setSelectedImage(imageFile);
     }
@@ -93,7 +97,7 @@ function Banner() {
           <div key={notice.id} className={styles.noticeItem}>
             
             {notice.imageUrl && (
-              <img src={notice.imageUrl} alt="Banner" className={styles.noticeImage} />
+              <img src={notice.imageUrl.includes('upload') ? host+"/"+notice.imageUrl : notice.imageUrl} alt="Banner" className={styles.noticeImage} />
             )}
             <h3 className={styles.noticeTitle}>{notice.title}</h3>
             <p className={styles.noticeDate}>Posted on: {notice.date}</p>

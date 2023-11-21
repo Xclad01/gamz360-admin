@@ -1,9 +1,14 @@
-import React from 'react';
+import React , { useState } from 'react';
 import styles from './UserInfo.module.css';
 
 
 function UserInfo(props) {
     console.log("poroper s ",props)
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    const closePopup = () => setIsVisible(false);
+
 
     const userData = props.userInfo != undefined ? {
         "name": props.userInfo.username || "" ,
@@ -77,7 +82,7 @@ function UserInfo(props) {
                     </div>
 
                     <div className={styles.userInfoActions}>
-                        <button className={styles.AddactionButton}>Add Money</button>
+                        <button className={styles.AddactionButton}  onClick={(e) => {e.stopPropagation(); setIsVisible(!isVisible);}} >Add Money</button>
                         <button className={styles.DeductactionButton}>Deduct Money</button>
                         <button className={styles.kycButton}>KYC Info</button>
                     </div>
@@ -107,6 +112,7 @@ function UserInfo(props) {
                     </div>
                 </div>
             </div>
+
 
         </>
     );
